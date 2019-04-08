@@ -9,11 +9,11 @@ gridpoly <- function(Pt,n,H) {
   delta_x <- (b-a)/n
   delta_y <- (d-c)/n
   #delta <- norm([delta_x,delta_y])
-  x <- seq(a,b,by=delta_x)
-  y <- seq(c,d,by=delta_y)
+  x <- seq(a,b,by = delta_x)
+  y <- seq(c,d,by = delta_y)
   delta <- min(delta_x,delta_y)
-  x <- seq(a,b,by=delta)
-  y <- seq(c,d,by=delta)
+  x <- seq(a,b,by = delta)
+  y <- seq(c,d,by = delta)
   X <- meshgrid(x,y)$X
   Y <- meshgrid(x,y)$Y
   X <- matrix(X,ncol=1)
