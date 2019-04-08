@@ -4,7 +4,6 @@
 #' @importFrom graphics plot
 #' @importFrom tripack tri.mesh triangles
 #' @importFrom pracma numel isempty meshgrid
-#' @importFrom fdaPDE create.MESH.2D
 #' @param Pt A two by \code{N} matrix which indicates the outer boundry points of a 2D region.
 #' @param n An integer parameter controlling the fineness of the triangulation
 #' and subsequent triangulation. As n increases the fineness increases. Usually, \code{n = 8} seems to be a
@@ -30,16 +29,20 @@
 #'
 #' # irregular domain
 #' data("horseshoe")
-#' TriMesh(horseshoe,n=8)
+#' VT=TriMesh(horseshoe,n=8)
+#'
+#' data('V_EX1')
+#' VT=TriMesh(V_EX1,15)
+#'
+#' data('weird')
+#' VT=TriMesh(weird,25)
 #'
 #' # region with holes
 #' data("BMP")
-#' TriMesh(BMP$bound,n=16,list(as.matrix(BMP$H1),as.matrix(BMP$H2)))
+#' VT=TriMesh(BMP$bound,25,list(as.matrix(BMP$H1),as.matrix(BMP$H2)))
 #'
 #' data("mymontreal")
-#' plot(mymontreal$bound[,1],mymontreal$bound[,2])
-#' TriMesh(mymontreal$bound,5)
-#' TriMesh(mymontreal$bound,18,list(mymontreal$H1,mymontreal$H2))
+#' VT=TriMesh(mymontreal$bound,25,list(mymontreal$H1,mymontreal$H2))
 #' @export
 
 TriMesh <- function(Pt,n,H=NULL) {
@@ -72,7 +75,6 @@ TriMesh <- function(Pt,n,H=NULL) {
   if (length(dT) > 0) {
     Tr<-Tr[-dT,]
   }
-  triplot  <-  create.MESH.2D(nodes = V,triangles = Tr)
-  plot(triplot)
+  TriPlot(V,Tr)
   return(list(V = V,Tr = Tr))
 }
